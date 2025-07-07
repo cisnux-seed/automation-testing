@@ -10,11 +10,11 @@ pipeline {
   }
 
   stages {
-    stage('Checkout') {
-      steps {
-        git url: 'git@github.com:cisnux-seed/automation-testing.git', branch: 'main'
-      }
-    }
+//     stage('Checkout') {
+//       steps {
+//         git url: 'git@github.com:cisnux-seed/automation-testing.git', branch: 'main'
+//       }
+//     }
 
     stage('Unit Test & Coverage') {
       steps {
@@ -47,7 +47,7 @@ pipeline {
   post {
     success {
       echo "Pipeline berhasil 🚀"
-      echo "Hello World! This is a Jenkins pipeline for automation testing."
+      echo "Hello World! This is a Jenkins pipeline for automation testing. 2"
     }
     failure {
       echo "Pipeline gagal 💥"
