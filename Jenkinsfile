@@ -27,7 +27,6 @@ pipeline {
       }
     }
 
-    // Commented out until SonarQube token is fixed
     stage('Static Code Analysis (SAST) via Sonar') {
       steps {
         sh """
