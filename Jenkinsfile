@@ -18,16 +18,11 @@ pipeline {
 
     stage('Unit Test & Coverage') {
       steps {
-        sh 'mvn package -Djacoco.skip=true'
+        sh 'mvn package'
       }
       post {
         always {
-          archiveArtifacts artifacts: 'target/surefire-reports/**/*', allowEmptyArchive: true
-
-          script {
-            def testResults = sh(script: 'find target/surefire-reports -name "*.xml" | wc -l', returnStdout: true).trim()
-            echo "Found ${testResults} test result files"
-          }
+          junit 'target/surefire-reports/*.xml'
         }
       }
     }
