@@ -12,7 +12,7 @@ pipeline {
   stages {
     stage('Checkout') {
       steps {
-        git url: 'https://github.com/noghanodedra/spring-boot-rest-api-unit-tests', branch: 'main'
+        git url: 'https://github.com/cisnux-seed/automation-testing.git', branch: 'main'
       }
     }
 
