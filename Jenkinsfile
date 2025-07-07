@@ -18,7 +18,7 @@ pipeline {
 
     stage('Unit Test & Coverage') {
       steps {
-        sh 'mvn package -Djacoco.skip=true'
+        sh 'mvn package'
       }
       post {
         always {
