@@ -40,7 +40,7 @@ pipeline {
               -Dsonar.projectKey=springboot \
               -Dsonar.projectName='springboot' \
               -Dsonar.host.url=http://sonarqube:9000 \
-              -Dsonar.token=sqp_9e82fd84bbedd99973c27ac836c7c0c4af7b6eb8 \
+              -Dsonar.token=sqp_f572d5882877800614fb370a7d868cfa29ceb4cd \
               -Djacoco.skip=true
         """
       }
