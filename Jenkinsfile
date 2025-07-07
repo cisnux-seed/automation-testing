@@ -12,27 +12,21 @@ pipeline {
   stages {
     stage('Checkout') {
       steps {
-        git url: 'https://github.com/cisnux-seed/automation-testing', branch: 'main'
+        git url: 'https://github.com/cisnux-seed/automation-testing.git', branch: 'main'
       }
     }
 
     stage('Unit Test & Coverage') {
       steps {
-        sh 'mvn package -Djacoco.skip=true'
+        sh 'mvn package'
       }
       post {
         always {
-          archiveArtifacts artifacts: 'target/surefire-reports/**/*', allowEmptyArchive: true
-
-          script {
-            def testResults = sh(script: 'find target/surefire-reports -name "*.xml" | wc -l', returnStdout: true).trim()
-            echo "Found ${testResults} test result files"
-          }
+          junit 'target/surefire-reports/*.xml'
         }
       }
     }
 
-    // Commented out until SonarQube token is fixed
     stage('Static Code Analysis (SAST) via Sonar') {
       steps {
         sh """
@@ -40,8 +34,7 @@ pipeline {
               -Dsonar.projectKey=springboot \
               -Dsonar.projectName='springboot' \
               -Dsonar.host.url=http://sonarqube:9000 \
-              -Dsonar.token=sqp_f572d5882877800614fb370a7d868cfa29ceb4cd \
-              -Djacoco.skip=true
+              -Dsonar.token=sqp_f572d5882877800614fb370a7d868cfa29ceb4cd
         """
       }
     }
