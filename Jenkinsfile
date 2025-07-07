@@ -47,7 +47,7 @@ pipeline {
   post {
     success {
       echo "Pipeline berhasil 🚀"
-      echo "Hello World! This is a Jenkins pipeline for automation testing. 2"
+      echo "Hello World! This is a Jenkins pipeline for automation testing. 3"
     }
     failure {
       echo "Pipeline gagal 💥"
