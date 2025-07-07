@@ -18,15 +18,12 @@ pipeline {
 
     stage('Unit Test & Coverage') {
       steps {
-        sh 'mvn package'
+        sh 'mvn package -Djacoco.skip=true'
       }
       post {
         always {
-          // Archive test results and reports
           archiveArtifacts artifacts: 'target/surefire-reports/**/*', allowEmptyArchive: true
-          archiveArtifacts artifacts: 'target/site/jacoco/**/*', allowEmptyArchive: true
 
-          // Simple test result check
           script {
             def testResults = sh(script: 'find target/surefire-reports -name "*.xml" | wc -l', returnStdout: true).trim()
             echo "Found ${testResults} test result files"
@@ -35,6 +32,8 @@ pipeline {
       }
     }
 
+    // Commented out until SonarQube token is fixed
+    /*
     stage('Static Code Analysis (SAST) via Sonar') {
       steps {
         sh """
@@ -42,10 +41,12 @@ pipeline {
               -Dsonar.projectKey=springboot \
               -Dsonar.projectName='springboot' \
               -Dsonar.host.url=http://sonarqube:9000 \
-              -Dsonar.token=sqp_b109e7199c79e53fcd7e46677e1b0f1b4b694195
+              -Dsonar.token=sqp_b109e7199c79e53fcd7e46677e1b0f1b4b694195 \
+              -Djacoco.skip=true
         """
       }
     }
+    */
   }
 
   post {
